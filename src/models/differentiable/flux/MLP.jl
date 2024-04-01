@@ -6,6 +6,7 @@ Constructor for models trained in `Flux.jl`.
 struct FluxModel <: AbstractFluxModel
     model::Any
     likelihood::Symbol
+    fitresult::Any
     function FluxModel(model, likelihood)
         if likelihood ∈ [:classification_binary, :classification_multi]
             new(model, likelihood)

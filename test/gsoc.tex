@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath, amssymb} % For advanced mathematics
+%\usepackage{graphicx} % For images
+%\usepackage{hyperref} % For hyperlinks
+
+\title{From Counterfactuals to Interventions (Recourse through Minimal Causal Interventions)}
+\author{Jorge Luiz Franco\\ \texttt{jorge.luiz@usp.br}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This GSoC proposal aims to extend the \texttt{CounterfactualExplanations.jl} package by incorporating a mathematical foundation for algorithmic recourse through minimal interventions, based on causal reasoning principles. It seeks to enable actionable paths from counterfactual explanations, bridging the gap between theoretical machine learning decision processes and practical user-driven changes.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+Predictive models significantly impact high-stake decisions, requiring not only interpretability but actionable pathways for altering undesirable outcomes. Counterfactual explanations highlight possible changes to alter model decisions. This project suggests enhancing \texttt{CounterfactualExplanations.jl} with a module for generating minimal interventions grounded in causal models.
+
+\subsection{Mathematical Background}
+We will build upon the groundwork of structural causal models (SCMs) and counterfactual reasoning to establish our intervention strategies.
+
+\subsubsection{Structural Causal Models (SCMs)}
+An SCM is defined as follows, capturing the relations between observed variables $X$ and unobserved variables $U$:
+\begin{align}
+  X &= f(U, X_{pa}), \\
+  U &\sim P(U),
+\end{align}
+where $X_{pa}$ represents the parent variables of $X$, and $P(U)$ is the probability distribution of $U$.
+
+\subsubsection{Counterfactual Reasoning}
+Counterfactual reasoning assesses what the outcome $Y$ would have been under a different circumstance $X=x'$:
+\begin{align}
+  Y_{x'} &= f_Y(x', U_X = u_{X|Y=y}),
+\end{align}
+where $u_{X|Y=y}$ is the instantiation of $U_X$ leading to $Y=y$ when $X=x'$.
+
+\section{Objective}
+The objective is to implement mathematical algorithms translating counterfactual insights into actionable minimal interventions, thus providing explicit strategies for users to influence predictive outcomes.
+
+\section{Methodology}
+We aim to find a vector of interventions $\delta^*$ that minimally perturbs the features to achieve a desired outcome, adhering to:
+\begin{align}
+\delta^* = \arg \min_\delta C(\delta, X) \; \text{s.t.} \; h(X+\delta) = y',
+\end{align}
+where $C(\delta, X)$ encapsulates the cost of altering $X$ by $\delta$ to realize $y'$.
+
+\section{Julia Implementation}
+Consider a pseudo-Julia implementation sketch provided for the minimal intervention algorithm; in actual LaTeX with basic formatting, it would look like this:
+
+\begin{verbatim}
+function minimal_intervention(model, X, y_desired)
+    # Define the objective function
+    objective = delta -> intervention_cost(delta, X)
+    # Define the constraint for achieving the desired outcome
+    constraint = delta -> model(X + delta) == y_desired
+    # Solve for minimal delta
+    delta_star = optimize(objective, constraint, initial_guess(delta))
+    return delta_star
+end
+\end{verbatim}
+
+\section{Project Plan and Timeline}
+\begin{itemize}
+    \item \textbf{Weeks 1-4:} Mathematical formulation and Julia prototyping.
+    \item \textbf{Weeks 5-8:} Development and testing of the minimal intervention algorithm.
+    \item \textbf{Weeks 9-12:} Refinement, benchmarking, and comprehensive documentation.
+\end{itemize}
+
+\section{Conclusion}
+Enriching \texttt{CounterfactualExplanations.jl} with capabilities for causal interventions through minimal adjustments promises vast improvements in machine learning model interpretability and navigability, handing users a practically applicable toolset for modulating and understanding model predictions.
+
+\begin{thebibliography}{9}
+\bibitem{karimi2020algorithmic}
+Amir-Hossein Karimi, Bernhard Schölkopf, and Isabel Valera,
+``Algorithmic Recourse: from Counterfactual Explanations to Interventions,''
+\textit{arXiv preprint arXiv:2002.06278}, 2020.
+\end{thebibliography}
+
+\end{document}

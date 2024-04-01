@@ -69,6 +69,7 @@ export AbstractGradientBasedGenerator
 export AbstractNonGradientBasedGenerator
 export ClaPROARGenerator
 export FeatureTweakGenerator
+export ECCCoGenerator
 export GenericGenerator
 export GravitationalGenerator
 export GreedyGenerator

@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}Introduction}{2}%
+\contentsline {subsection}{\numberline {1.1}Mathematical Background}{2}%
+\contentsline {subsubsection}{\numberline {1.1.1}Structural Causal Models (SCMs)}{2}%
+\contentsline {subsubsection}{\numberline {1.1.2}Counterfactual Reasoning}{2}%
+\contentsline {section}{\numberline {2}Objective}{2}%
+\contentsline {section}{\numberline {3}Methodology}{3}%
+\contentsline {section}{\numberline {4}Julia Implementation}{3}%
+\contentsline {section}{\numberline {5}Project Plan and Timeline}{3}%
+\contentsline {section}{\numberline {6}Conclusion}{3}%

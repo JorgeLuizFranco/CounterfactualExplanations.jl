@@ -2,12 +2,15 @@
 
 
 using CategoricalArrays
-using CounterfactualExplanations
 using CounterfactualExplanations.DataPreprocessing
+using CounterfactualExplanations
+
+
+include("../src/CounterfactualExplanations.jl")
 
 using TaijaData
 using Plots
-#using TaijaPlotting
+using TaijaPlotting
 using Flux
 
 using MLUtils: stack
@@ -149,7 +152,7 @@ plot(ce)
 ```
 """
 function Plots.plot(
-    ce_plot::CounterfactualExplanation;
+    ce_plot::Main.CounterfactualExplanations.CounterfactualExplanation;
     alpha_ = 0.5,
     plot_up_to::Union{Nothing,Int} = nothing,
     plot_proba::Bool = false,
@@ -392,7 +395,7 @@ function set_up_plots(ce::CounterfactualExplanation; alpha, plot_proba, kwargs..
 end
 
 function Plots.plot(
-    ce_plot::CounterfactualExplanation;
+    ce_plot::Main.CounterfactualExplanations.CounterfactualExplanation;
     alpha_ = 0.5,
     plot_up_to::Union{Nothing,Int} = nothing,
     plot_proba::Bool = false,
@@ -439,6 +442,8 @@ generator = WachterGenerator()
 ce = generate_counterfactual(x, target, counterfactual_data, M, generator)
 
 print(ce)
+
+
 
 Plots.plot(ce)
 
