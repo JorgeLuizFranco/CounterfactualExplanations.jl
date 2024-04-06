@@ -12,16 +12,20 @@ include("distance_utils.jl")
 include("loss_functions.jl")
 include("penalties.jl")
 
-export logitbinarycrossentropy, logitcrossentropy, mse, predictive_entropy
+export logitbinarycrossentropy, logitcrossentropy, mse, predictive_entropy, conformal_training_loss
 export losses_catalogue
 export distance, distance_mad, distance_l0, distance_l1, distance_l2, distance_linf
 export ddp_diversity
+export set_size_penalty, distance_from_energy, energy_delta
 export penalties_catalogue
 
 const losses_catalogue = Dict(
     :logitbinarycrossentropy => logitbinarycrossentropy,
     :logitcrossentropy => logitcrossentropy,
     :mse => mse,
+    :set_size_penalty => set_size_penalty,
+    :distance_from_energy => distance_from_energy,
+    :energy_delta => energy_delta,
 )
 
 const penalties_catalogue = Dict(

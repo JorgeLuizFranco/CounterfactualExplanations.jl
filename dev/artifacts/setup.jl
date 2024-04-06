@@ -7,6 +7,7 @@ setup = quote
     using CounterfactualExplanations.Models
     using Flux
     using Images
+    using ConformalPrediction
 
     # Utils
     include("$(pwd())/dev/artifacts/utils.jl")

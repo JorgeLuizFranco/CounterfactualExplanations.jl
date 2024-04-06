@@ -24,6 +24,7 @@ export AbstractFittedModel
 export AbstractDifferentiableModel
 export Linear
 export FluxModel
+export ConformalModel
 export FluxEnsemble
 export DecisionTreeModel
 export RandomForestModel
@@ -50,7 +51,7 @@ function probs(M::AbstractFittedModel, X::AbstractArray) end
 A dictionary containing all trainable machine learning models.
 """
 const standard_models_catalogue = Dict(
-    :Linear => Linear, :MLP => FluxModel, :DeepEnsemble => FluxEnsemble
+    :Linear => Linear, :MLP => FluxModel, :DeepEnsemble => FluxEnsemble, :Conformal => ConformalModel
 )
 
 """
@@ -64,6 +65,7 @@ const all_models_catalogue = Dict(
     :DeepEnsemble => FluxEnsemble,
     :DecisionTree => DecisionTreeModel,
     :RandomForest => RandomForestModel,
+    :Conformal => ConformalModel,
 )
 
 """
@@ -84,6 +86,16 @@ const mlj_models_catalogue = Dict(
 Fits one of the available default models to the `counterfactual_data`. The `model` argument can be used to specify the desired model. The available values correspond to the keys of the [`all_models_catalogue`](@ref) dictionary.
 """
 function fit_model(counterfactual_data::CounterfactualData, model::Symbol=:MLP; kwrgs...)
+    @assert model in keys(all_models_catalogue) "Specified model does not match any of the models available in the `all_models_catalogue`."
+
+    # Set up:
+    M = all_models_catalogue[model](counterfactual_data; kwrgs...)
+    M = train(M, counterfactual_data)
+
+    return M
+end
+
+function fit_model(counterfactual_data::CounterfactualData, model::Symbol=:Conformal; kwrgs...)
     @assert model in keys(all_models_catalogue) "Specified model does not match any of the models available in the `all_models_catalogue`."
 
     # Set up:

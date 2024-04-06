@@ -24,6 +24,7 @@ export AbstractNonGradientBasedGenerator
 export ClaPROARGenerator
 export CLUEGenerator
 export DiCEGenerator
+export ECCCoGenerator
 export FeatureTweakGenerator
 export GenericGenerator
 export GravitationalGenerator
@@ -40,6 +41,7 @@ export @objective, @with_optimiser, @search_feature_space, @search_latent_space
 export JSMADescent
 export hinge_loss
 export predictive_entropy
+export conformal_training_loss
 export ProbeGenerator
 
 include("macros.jl")
@@ -75,6 +77,7 @@ generator_catalogue = Dict(
     :wachter => Generators.WachterGenerator,
     :probe => Generators.ProbeGenerator,
     :clue => Generators.CLUEGenerator,
+    :eccco => Generators.ECCCoGenerator,
 )
 
 end

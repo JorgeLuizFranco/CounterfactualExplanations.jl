@@ -49,6 +49,7 @@ include("models/Models.jl")
 using .Models
 export AbstractFittedModel, AbstractDifferentiableModel
 export Linear, FluxModel, FluxEnsemble
+export ConformalModel
 export flux_training_params
 export probs, logits
 export standard_models_catalogue,
@@ -68,6 +69,7 @@ using .Generators
 export AbstractGradientBasedGenerator
 export AbstractNonGradientBasedGenerator
 export ClaPROARGenerator
+export ECCCoGenerator
 export FeatureTweakGenerator
 export GenericGenerator
 export GravitationalGenerator
